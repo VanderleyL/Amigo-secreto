@@ -12,7 +12,6 @@ function adicionarAmigo(){
             timer: 3000
           });
           return;
-
     }
     for(i=0;i<listaAmigos.length;i++){
         if(amigo == listaAmigos[i]){
@@ -23,22 +22,17 @@ function adicionarAmigo(){
                 confirmButtonText: "OK",
                 timer: 3200
               });
-              return;
-        }
+              return;    }
     }
-
     listaAmigos.push(amigo);
     for(let i = 0;i<listaAmigos.length;i++){
         exibirAmigos('#listaAmigos',`${listaAmigos}`);
         }
         if(listaAmigos.length>1){
             document.getElementById('sortearAmigo').disabled = false;
-        }
-    
+        } 
     limparCampo();
     }
-    
-
 function exibirAmigos() {
     let listaHTML = document.querySelector('#listaAmigos');
     listaHTML.innerHTML = "";
@@ -51,7 +45,6 @@ function exibirAmigos() {
 function exibeSorteado(tag,texto){
         let campo = document.querySelector(tag);
         campo.innerHTML = texto;}
-
 
 function sortearAmigo(){
     let amigoSorteado = listaAmigos[Math.floor(Math.random()* listaAmigos.length)];
