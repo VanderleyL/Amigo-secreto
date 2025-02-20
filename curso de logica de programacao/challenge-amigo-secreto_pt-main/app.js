@@ -1,45 +1,78 @@
 //O principal objetivo deste desafio é fortalecer suas habilidades em lógica de programação. Aqui você deverá desenvolver a lógica para resolver o problema.
-let amigos =[];
+let listaAmigos = [];
 
 function adicionarAmigo(){
-    const inputAmigo = document.getElementById('amigo');
-    const nomeAmigo = inputAmigo.ariaValueMax.trim();
+    let amigo = document.querySelector('input').value;
+    if(!amigo){
+        Swal.fire({
+            title: "Erro ao inserir nome!",
+            text: "Por favor insira um nome válido.",
+            icon: "error",
+            confirmButtonText: "OK",
+            timer: 3000
+          });
+          return;
 
-    if(nome === ''){
-        alert('Por favor, inserir um nome')
-        return;
     }
-    if(amigos.includes(nomeAmigo)){
-        alert(`O nome ${nomeAmigo} ja esta na lista`);
-        return;
+    for(i=0;i<listaAmigos.length;i++){
+        if(amigo == listaAmigos[i]){
+            Swal.fire({
+                title: "Nome já inserido!",
+                text: "Se for outra pessoa por favor colocar o sobrenome",
+                icon: "error",
+                confirmButtonText: "OK",
+                timer: 3200
+              });
+              return;
+        }
     }
-    amigos.push(nomeAmigo);
 
-    inputAmigo.ariaValu = "";
+    listaAmigos.push(amigo);
+    for(let i = 0;i<listaAmigos.length;i++){
+        exibirAmigos('#listaAmigos',`${listaAmigos}`);
+        }
+        if(listaAmigos.length>1){
+            document.getElementById('sortearAmigo').disabled = false;
+        }
+    
+    limparCampo();
+    }
+    
 
-    atualizarLista();
+function exibirAmigos() {
+    let listaHTML = document.querySelector('#listaAmigos');
+    listaHTML.innerHTML = "";
+
+    for (let i = 0; i < listaAmigos.length; i++) {
+        let item = document.createElement('li');
+        item.textContent = listaAmigos[i];
+        listaHTML.appendChild(item);   }
 }
+function exibeSorteado(tag,texto){
+        let campo = document.querySelector(tag);
+        campo.innerHTML = texto;}
 
-function atualizarLista() {
-    const listaAmigos = document.getElementById('listaAmigos');
-    listaAmigos.innerHTML= "";
-
-    for(let i = 0; i <amigos.length; i++){
-        const li = document.createElement('li');
-        li.textContent = amigos[i];
-        listaAmigos.appendChild(li);
-    }
-}
 
 function sortearAmigo(){
-    if(amigos.length === 0){
-        alert('Nao ha amigos disponioveis para sortear. insira pelomenos um');
-    }
-    const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+    let amigoSorteado = listaAmigos[Math.floor(Math.random()* listaAmigos.length)];
+    exibeSorteado('#resultado',`O amigo sorteado é: ${amigoSorteado} `);
+     document.getElementById('sortearAmigo').setAttribute('disabled', true);
+     document.getElementById('novoSorteio').disabled = false;
+     document.getElementById('button-add').setAttribute('disabled', true);
+     document.getElementById('amigo').setAttribute('disabled', true);
+}
+function limparCampo(){
+    amigo = document.querySelector('input');
+    amigo.value = '';
+}
+function novoSorteio(){
+    let listaHTML = document.querySelector('#listaAmigos');
+    listaHTML.innerHTML = "";
+    exibeSorteado('#resultado','');
+    limparCampo();
+    document.getElementById('button-add').disabled = false;
+    document.getElementById('amigo').disabled = false;
+    document.getElementById('novoSorteio').setAttribute('disabled', true);
+    listaAmigos = [];
+}
 
-    const amigoSorteado = amigos[indiceAleatorio];
-
-    const resultado = document.getElementById('resultado');
-    resultado.innerHTML = `Amigo sorteado: <strong>${amigoSorteado}</strong>`;
-
-} 
