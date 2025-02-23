@@ -4,7 +4,7 @@ let listaAmigos = [];
 function adicionarAmigo(){
     let amigo = document.querySelector('input').value;
     if(!amigo){
-        Swal.fire({alert('Por favor, inserir um nome')
+        Swal.fire({alert('Por favor, insira um nome')
             title: "Erro ao inserir nome!",
             text: "Por favor insira um nome válido.",
             icon: "error",
@@ -14,7 +14,7 @@ function adicionarAmigo(){
           return;
     }
     for(i=0;i<listaAmigos.length;i++){
-        if(amigo == listaAmigos[i]){alert('Por favor, se for outra pessoa inserir um sobrenome')
+        if(amigo == listaAmigos[i]){alert('Por favor, se for outra pessoa insira um sobrenome')
             Swal.fire({
                 title: "Nome já inserido!",
                 text: "Se for outra pessoa por favor colocar o sobrenome",
